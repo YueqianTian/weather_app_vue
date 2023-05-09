@@ -1,0 +1,182 @@
+[
+	{
+		"code": "00",
+		"icon__code": ["0d", "0n"]
+	},
+	{
+		"code": "01",
+		"icon__code": ["1d", "1n"]
+	},
+	{
+		"code": "02",
+		"icon__code": "2"
+	},
+	{
+		"code": "03",
+		"icon__code": ["3d", "3n"]
+	},
+	{
+		"code": "04",
+		"icon__code": "4"
+	},
+	{
+		"code": "05",
+		"icon__code": "5"
+	},
+	{
+		"code": "06",
+		"icon__code": "6"
+	},
+	{
+		"code": "07",
+		"icon__code": "7"
+	},
+	{
+		"code": "08",
+		"icon__code": "8"
+	},
+	{
+		"code": "09",
+		"icon__code": "9"
+	},
+	{
+		"code": "10",
+		"icon__code": "10"
+	},
+	{
+		"code": "11",
+		"icon__code": "11"
+	},
+	{
+		"code": "12",
+		"icon__code": "11"
+	},
+	{
+		"code": "13",
+		"icon__code": "13"
+	},
+	{
+		"code": "14",
+		"icon__code": "14"
+	},
+	{
+		"code": "15",
+		"icon__code": "15"
+	},
+	{
+		"code": "16",
+		"icon__code": "16"
+	},
+	{
+		"code": "17",
+		"icon__code": "17"
+	},
+	{
+		"code": "18",
+		"icon__code": "18"
+	},
+	{
+		"code": "19",
+		"icon__code": "19"
+	},
+	{
+		"code": "20",
+		"icon__code": "20"
+	},
+	{
+		"code": "21",
+		"icon__code": "8"
+	},
+	{
+		"code": "22",
+		"icon__code": "9"
+	},
+	{
+		"code": "23",
+		"icon__code": "10"
+	},
+	{
+		"code": "24",
+		"icon__code": "11"
+	},
+	{
+		"code": "25",
+		"icon__code": "11"
+	},
+	{
+		"code": "26",
+		"icon__code": "15"
+	},
+	{
+		"code": "27",
+		"icon__code": "16"
+	},
+	{
+		"code": "28",
+		"icon__code": "17"
+	},
+	{
+		"code": "29",
+		"icon__code": "29"
+	},
+	{
+		"code": "30",
+		"icon__code": "30"
+	},
+	{
+		"code": "31",
+		"icon__code": "20"
+	},
+	{
+		"code": "32",
+		"icon__code": "32"
+	},
+	{
+		"code": "33",
+		"icon__code": "33"
+	},
+	{
+		"code": "34",
+		"icon__code": "34"
+	},
+	{
+		"code": "35",
+		"icon__code": "35"
+	},
+	{
+		"code": "49",
+		"icon__code": "32"
+	},
+	{
+		"code": "53",
+		"icon__code": "53"
+	},
+	{
+		"code": "54",
+		"icon__code": "53"
+	},
+	{
+		"code": "55",
+		"icon__code": "53"
+	},
+	{
+		"code": "56",
+		"icon__code": "53"
+	},
+	{
+		"code": "57",
+		"icon__code": "57"
+	},
+	{
+		"code": "58",
+		"icon__code": "32"
+	},
+	{
+		"code": "301",
+		"icon__code": "7"
+	},
+	{
+		"code": "302",
+		"icon__code": "14"
+	}
+]
