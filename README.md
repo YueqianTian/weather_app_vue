@@ -6,6 +6,8 @@ John Komomarnicki - Vue and Taiwind - Weather App Build
 
 Re-created a Vue weather search app. This app was written in Vue3 (including VueX and Vue-Router) and uses some revised logic and methods not shown during the project lectures.
 
+See demo: https://weather-app-vue-v1.netlify.app/
+
 ### New features
 
 Progress bar - easier to distinguish between low and high temperature.
