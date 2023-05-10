@@ -20,7 +20,7 @@
 					</li>
 
 					<img
-						class="min-w-max h-[50px] object-cover brightness-200"
+						class="w-max h-[50px] object-cover brightness-200"
 						:src="getIconUrl(hourlyData, true)"
 					/>
 					<li class="text-xl">
