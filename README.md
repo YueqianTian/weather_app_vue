@@ -10,18 +10,18 @@ See demo: https://weather-app-vue-v2.netlify.app/
 
 ## New features
 
-**Index chart (v2.0)**  
+Index chart (v2.0)
 Line charts of overview on hourly weather index data (tempature, relative humidity, etc) in futher 10 days.
 
 (NOTE: Since lack of hourly data and sunrise/sunset data (only 48 hours), all hourly data we built for chart page according to SECOND DAY. )
 
-**Color system updated (v2.0)**  
+Color system updated (v2.0)  
 Different color levels due to different temperature ranges.
 
-**Progress bar**  
+Progress bar  
 Easier to distinguish between low and high temperature.
 
-**Preprocessor for search query**  
+Preprocessor for search query  
 Precise search for adminstrative regions, according to designed display strategies, which is more consistent with search habits.
 
 ## Running

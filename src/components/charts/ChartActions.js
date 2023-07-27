@@ -1,5 +1,5 @@
 let delayed;
-import { DateTime } from 'luxon';
+import { DateTime } from '../../node_modules/@types/luxon/index';
 
 // Get new date - refer to : chartjs- Utils
 export function newDate(days) {
