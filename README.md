@@ -10,7 +10,7 @@ See demo: https://weather-app-vue-v2.netlify.app/
 
 ## New features
 
-Index chart (v2.0)
+Index chart (v2.0)  
 Line charts of overview on hourly weather index data (tempature, relative humidity, etc) in futher 10 days.
 
 (NOTE: Since lack of hourly data and sunrise/sunset data (only 48 hours), all hourly data we built for chart page according to SECOND DAY. )
