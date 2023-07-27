@@ -5,13 +5,10 @@ export default {
 	savedCities(state) {
 		return state.savedCities;
 	},
-	dailyWeather(state) {
-		return state.detailedCityWeather.daily;
+	searchedCity(state) {
+		return state.searchedCity;
 	},
-	hourlyWeather(state) {
-		return state.detailedCityWeather.hourly;
-	},
-	sunriseData(state) {
-		return state.detailedCityWeather.sunrises;
+	indexGroup(state) {
+		return state.indexGroup;
 	},
 };

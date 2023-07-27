@@ -1,48 +1,68 @@
 <template>
-	<div class="max-w-screen-md w-full py-12">
-		<div class="mx-8 text-white">
-			<h2 class="mb-4">10日天气预报</h2>
-			<ul
-				v-for="dailyData in dailyWeather"
-				:key="dailyData?.date"
-				class="flex justify-between items-center list-none gap-10"
-			>
-				<li class="whitespace-nowrap">
-					{{
-						new Date(dailyData?.date).setHours(0, 0, 0, 0) ===
-						new Date().setHours(0, 0, 0, 0)
-							? '今天'
-							: new Date(dailyData?.date).toLocaleDateString(
-									'zh-CN',
-									{ weekday: 'short' }
-							  )
-					}}
-				</li>
-				<img
-					class="w-auto h-[50px] object-cover brightness-200"
-					:src="getIconUrl(dailyData)"
-				/>
-				<li
-					class="flex flex-progressbar gap-2 justify-end items-center"
-				>
-					<p>{{ Math.round(dailyData?.low) }}&deg;</p>
-					<progress-bar
-						:indicatorWidth="indicatorWidth(dailyData)"
-						:indicatorLeft="indicatorLeftFrom(dailyData)"
-					></progress-bar>
-					<p>{{ Math.round(dailyData?.high) }}&deg;</p>
-				</li>
-			</ul>
+	<base-container class="max-w-screen-md">
+		<div
+			class="pb-4 border-b-[1px] border-white border-opacity-10 flex gap-2 items-baseline"
+		>
+			<i class="fa-solid fa-calendar-week text-lg"></i>
+			<h2>10日天气预报</h2>
 		</div>
-	</div>
+
+		<ul
+			v-for="dailyData in dailyWeather"
+			:key="dailyData?.date"
+			class="list-none border-b-[1px] border-white border-opacity-10 last:border-none"
+		>
+			<li @click="selectDate(dailyData?.date)">
+				<div class="flex justify-between items-center gap-10">
+					<div class="whitespace-nowrap">
+						{{
+							new Date(dailyData?.date).setHours(0, 0, 0, 0) ===
+							new Date().setHours(0, 0, 0, 0)
+								? '今天'
+								: new Date(dailyData?.date).toLocaleDateString(
+										'zh-CN',
+										{
+											weekday: 'short',
+										}
+								  )
+						}}
+					</div>
+					<img
+						class="w-auto h-[50px] object-cover brightness-200"
+						:src="getIconUrl({ weatherData: dailyData })"
+					/>
+					<div
+						class="flex flex-progressbar gap-2 justify-end items-center"
+					>
+						<p>{{ Math.round(dailyData?.low) }}&deg;</p>
+						<progress-bar
+							:indicatorWidth="indicatorWidth(dailyData)"
+							:indicatorLeft="indicatorLeftFrom(dailyData)"
+							:minTempIndex="minIndex"
+							:maxTempIndex="maxIndex"
+						></progress-bar>
+						<p>{{ Math.round(dailyData?.high) }}&deg;</p>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</base-container>
 </template>
 
 <script setup>
 import { inject } from 'vue';
 import ProgressBar from '../ui/ProgressBar.vue';
+import BaseContainer from '../ui/BaseContainer.vue';
+import { getIconUrl } from '../../assets/js/getIconUrl';
+import { selectTempStrategies } from '../charts/ChartActions.js';
 
-const getIconUrl = inject('getIconUrl');
 const dailyWeather = inject('dailyWeather');
+
+// Get selected date and pass to AsyncCityView.vue
+const emit = defineEmits(['dateSelected']);
+const selectDate = (day) => {
+	emit('dateSelected', new Date(day));
+};
 
 //////////////////////////////////////////////////////
 // Progress bar
@@ -70,4 +90,7 @@ const barIndicatorWidth = (minTemp, maxTemp, dailyData) => {
 // preset args
 const indicatorLeftFrom = barIndicatorLeftFrom.bind(null, min, max);
 const indicatorWidth = barIndicatorWidth.bind(null, min, max);
+
+// get color levels for progress bar
+const [minIndex, maxIndex] = selectTempStrategies(min, max);
 </script>

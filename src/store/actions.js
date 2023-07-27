@@ -18,8 +18,6 @@ export default {
 	},
 
 	async getWeatherData(_, payload) {
-		console.log('GetWeatherData!');
-
 		if (!payload.adcode) return;
 
 		// Find areacode
@@ -55,15 +53,16 @@ export default {
 
 		// Handle weather data
 		const [responseData1, responseData2, responseData3] = response;
-		return {
+		const responseData = {
 			hourly: responseData1.data.result.hourly_fcsts,
 			daily: responseData2.data.result.daily_fcsts,
 			sunrises: responseData3.data.result.sunrises,
 		};
+		return responseData;
 	},
 
-	preProcessSearchQuery(_, payload) {
-		// Need to pre-process if search queries are Municipality(直辖市) or Special Administrative Region(特别行政区) or Province(省份)
+	preProcessSearchTerm(_, payload) {
+		// Need to pre-process if search terms are Municipality(直辖市) or Special Administrative Region(特别行政区) or Province(省份)
 		const regexKeywords_1 = /(^北京|^上海|^重庆|^天津)/gs;
 		const regexKeywords_2 = /(^澳门|^香港)/gs;
 		const regexKeywords_3 =
@@ -85,14 +84,14 @@ export default {
 	},
 
 	async getCityData(context, payload) {
-		// Pre-process search query
-		const filteredSearchQuery = await context.dispatch(
-			'preProcessSearchQuery',
+		// Pre-process search term
+		const filteredSearchTerm = await context.dispatch(
+			'preProcessSearchTerm',
 			payload
 		);
 
 		// Send request
-		const url = `https://restapi.amap.com/v3/config/district?keywords=${filteredSearchQuery}&key=${config.AMAP_API_KEY}`;
+		const url = `https://restapi.amap.com/v3/config/district?keywords=${filteredSearchTerm}&key=${config.AMAP_API_KEY}`;
 		const response = await fetch(url, {
 			method: 'GET',
 			headers: { Accept: 'application/json' },

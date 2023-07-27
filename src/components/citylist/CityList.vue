@@ -1,9 +1,11 @@
 <template>
-	<div v-for="city in savedCities" :key="city.id">
-		<city-card :city="city" @click="goToCityView(city)"></city-card>
+	<div v-if="!hasError">
+		<div v-for="city in savedCities" :key="city.id">
+			<city-card :city="city" @click="goToCityView(city)"></city-card>
+		</div>
 	</div>
 
-	<p v-if="savedCities.length === 0">
+	<p v-if="savedCities.length === 0" class="mt-[-.5rem]">
 		还未添加地理位置。在上方输入栏搜索区域关键词，即刻订阅天气预报。
 	</p>
 </template>
@@ -12,11 +14,12 @@
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 import CityCard from './CityCard.vue';
-import { computed } from 'vue';
+import { ref, computed } from 'vue';
 
 const router = useRouter();
 const store = new useStore();
 const savedCities = computed(() => store.getters.savedCities);
+const hasError = ref(false);
 
 const loadCityWeather = async () => {
 	store.dispatch('getSavedCities');
@@ -33,6 +36,7 @@ const loadCityWeather = async () => {
 			);
 		} catch (err) {
 			console.log(err.message);
+			hasError.value = true;
 		}
 	});
 
@@ -45,7 +49,7 @@ await loadCityWeather();
 const goToCityView = (selectedCity) => {
 	router.push({
 		name: 'cityView',
-		params: { city: selectedCity.city },
+		params: { city: selectedCity.name },
 		query: {
 			adcode: selectedCity.adcode,
 			id: selectedCity.id,

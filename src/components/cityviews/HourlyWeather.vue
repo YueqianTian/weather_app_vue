@@ -1,14 +1,20 @@
 <template>
-	<div class="max-w-screen-md w-full py-12">
-		<div class="mx-8 text-white">
-			<h2 class="mb-4">每小时天气预报</h2>
-			<div class="flex gap-10 overflow-x-scroll">
-				<ul
-					v-for="hourlyData in hourlyWeather"
-					:key="hourlyData?.data_time"
-					class="flex flex-col gap-4 items-center list-none whitespace-nowrap"
-				>
-					<li class="text-md">
+	<base-container class="max-w-screen-md">
+		<div
+			class="pb-4 border-b-[1px] border-white border-opacity-10 mb-4 flex gap-2 items-baseline"
+		>
+			<i class="fa-regular fa-clock text-lg"></i>
+			<h2>每小时天气预报</h2>
+		</div>
+
+		<div class="flex gap-10 overflow-x-scroll">
+			<ul
+				v-for="hourlyData in hourlyWeather"
+				:key="hourlyData?.data_time"
+				class="list-none"
+			>
+				<li class="flex flex-col gap-4 items-center whitespace-nowrap">
+					<div class="text-md">
 						{{
 							new Date(hourlyData?.data_time).toLocaleTimeString(
 								'zh-CN',
@@ -17,24 +23,32 @@
 								}
 							)
 						}}
-					</li>
+					</div>
 
 					<img
 						class="w-max h-[50px] object-cover brightness-200"
-						:src="getIconUrl(hourlyData, true)"
+						:src="
+							getIconUrl(
+								{ weatherData: hourlyData, sunrisesData },
+								true
+							)
+						"
 					/>
-					<li class="text-xl">
+
+					<div class="text-xl">
 						{{ Math.round(hourlyData?.temp_fc) }}&deg;
-					</li>
-				</ul>
-			</div>
+					</div>
+				</li>
+			</ul>
 		</div>
-	</div>
+	</base-container>
 </template>
 
 <script setup>
 import { inject } from 'vue';
+import BaseContainer from '../ui/BaseContainer.vue';
+import { getIconUrl } from '../../assets/js/getIconUrl';
 
-const hourlyWeather = inject('hourlyWeather');
-const getIconUrl = inject('getIconUrl');
+const hourlyWeather = inject('hourlyWeather').slice(0, 24);
+const sunrisesData = inject('sunrisesData');
 </script>

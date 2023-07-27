@@ -1,10 +1,9 @@
 <template>
 	<div
-		class="flex py-6 px-3 bg-weather-secondary rounded-md shadow-md cursor-pointer"
+		class="flex py-6 px-3 bg-weather-secondary rounded-md shadow-md cursor-pointer mb-4"
 	>
 		<div class="flex flex-col flex-1 gap-2">
-			<h2 class="text-3xl">{{ city?.city }}</h2>
-
+			<h2 class="text-3xl">{{ city?.name }}</h2>
 			<p>{{ city?.weather?.hourly[0].text }}</p>
 		</div>
 

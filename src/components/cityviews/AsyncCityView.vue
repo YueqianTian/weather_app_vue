@@ -9,20 +9,26 @@
 		</div>
 
 		<!-- Weather Overview -->
-		<city-overview></city-overview>
-
-		<hr class="border-white border-opacity-10 border w-full" />
+		<CityOverview />
 
 		<!-- Hourly Weather  -->
-		<hourly-weather></hourly-weather>
-
-		<hr class="border-white border-opacity-10 border w-full" />
+		<HourlyWeather @click="goToIndexView('temp_fc')" />
 
 		<!-- Daily Weather -->
-		<daily-weather></daily-weather>
+		<DailyWeather
+			@dateSelected="getSelectedDate"
+			@click="goToIndexView('temp_fc', selectedDate)"
+		/>
 
+		<!-- Other index -->
+		<div class="flex gap-4 max-w-screen-md w-full pb-12">
+			<IndexOfHumidity @click="goToIndexView('rh')" />
+			<IndexOfFeelsLike @click="goToIndexView('feels_like')" />
+		</div>
+
+		<!-- Unsubscribe -->
 		<div
-			class="flex items-center gap-2 py-12 text-white cursor-pointer duration-150 hover:text-red-500"
+			class="flex items-center gap-2 pb-12 text-white cursor-pointer duration-150 hover:text-red-500"
 			@click="removeCity"
 			v-if="route.query.id"
 		>
@@ -35,38 +41,80 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
-import { provide, computed } from 'vue';
+import { provide, computed, ref } from 'vue';
 import CityOverview from './CityOverview.vue';
 import HourlyWeather from './HourlyWeather.vue';
 import DailyWeather from './DailyWeather.vue';
-import icons from '../../assets/json/iconCodeConversion.json';
+import IndexOfHumidity from './IndexOfHumidity.vue';
+import IndexOfFeelsLike from './IndexOfFeelsLike.vue';
 
 const route = new useRoute();
 const router = new useRouter();
 const store = new useStore();
-const adcode = route.query.adcode;
 const savedCities = computed(() => store.getters.savedCities);
-let weatherData;
+const searchedCity = computed(() => store.getters.searchedCity);
+const indexGroup = computed(() => store.getters.indexGroup);
+const selectedDate = ref('');
+
+const getSelectedDate = (day) => {
+	selectedDate.value = day;
+};
+
+const goToIndexView = (indexId, date = new Date()) => {
+	const selectedIndex = indexGroup.value.find(
+		(index) => index.id === indexId
+	);
+	const { id } = selectedIndex;
+
+	const query = Object.assign({}, route.query);
+	router.push({
+		name: 'indexView',
+		params: { index: id },
+		query: { ...query, date: date ? date : new Date() },
+	});
+};
 
 // Get city weather
 const selectedCityWeather = async () => {
-	const selectedCity = savedCities.value?.find(
-		(city) => city?.adcode === adcode
-	);
-	if (selectedCity) {
-		weatherData = selectedCity.weather;
-	} else {
-		try {
-			weatherData = await store.dispatch('getWeatherData', {
-				adcode: adcode,
-			});
+	let weatherData;
 
-			// Flicker delay
-			await new Promise((res) => setTimeout(res, 500));
-		} catch (err) {
-			console.error(err);
-		}
+	// 1. If city weather in 'store / searchedCity'
+	if (searchedCity.value) {
+		weatherData = searchedCity.value.weather;
 	}
+	// 2. If the city in 'citylist' and weather data saved in homepage
+	else {
+		if (
+			savedCities.value.length > 0 &&
+			savedCities.value.find(
+				(city) => city?.adcode === route.query.adcode
+			)
+		) {
+			weatherData = savedCities.value.find(
+				(city) => city?.adcode === route.query.adcode
+			).weather;
+		} else {
+			// 3. Async weather data from API
+			try {
+				weatherData = await store.dispatch('getWeatherData', {
+					adcode: route.query.adcode,
+				});
+			} catch (err) {
+				console.error(err);
+			}
+		}
+
+		// Save the city weather in the 'store / searchedCity' whether it has been loaded in citylist or not
+		let cityObj = {
+			adcode: route.query.adcode,
+			name: route.params.city,
+		};
+		cityObj.weather = weatherData;
+		store.commit('setSearchedCity', cityObj);
+	}
+
+	// Flicker delay
+	await new Promise((res) => setTimeout(res, 500));
 };
 await selectedCityWeather();
 
@@ -78,60 +126,14 @@ const removeCity = () => {
 
 	store.commit('setCities', updatedCities);
 
-	store.commit('deleteWeather');
+	store.commit('deleteCitiesWeather');
 
 	store.dispatch('storeSavedCities', updatedCities);
 
 	router.push({ name: 'home' });
 };
 
-///////////////////////////////////////////////////////////////////
-// Get icon url
-function getIconUrl(data, isHourlyWeather = false) {
-	// get icon code
-	const selectedIcon = icons.find(
-		(icon) => icon.code === (isHourlyWeather ? data.code : data.code_day)
-	);
-	// Hourly Weather
-	if (isHourlyWeather) {
-		const isNighttime = isDaytimeOrNighttime(data.data_time);
-		return iconcodeConvertedToUrl(selectedIcon.icon__code, isNighttime);
-	}
-	// Daily Weather
-	else {
-		return iconcodeConvertedToUrl(selectedIcon.icon__code, isHourlyWeather);
-	}
-}
-
-function iconcodeConvertedToUrl(iconcode, n) {
-	// load = false, +load = 0
-	// load = true, +load = 1
-	const code = iconcode.length > 1 ? iconcode[+n] : iconcode;
-
-	return new URL(`../../assets/icon/icon__${code}.png`, import.meta.url).href;
-}
-
-function isDaytimeOrNighttime(hour) {
-	const sunriseData = weatherData.sunrises;
-	const hourTimestamp = new Date(hour).getTime();
-	let isNighttime = true;
-
-	sunriseData.forEach((day) => {
-		const sunrise = day.data_time + ' ' + day.sunrise;
-		const sunset = day.data_time + ' ' + day.sunset;
-		const sunriseTimestamp = new Date(sunrise).getTime();
-		const sunsetTimestamp = new Date(sunset).getTime();
-		if (
-			hourTimestamp >= sunriseTimestamp &&
-			hourTimestamp <= sunsetTimestamp
-		) {
-			isNighttime = false;
-		}
-	});
-	return isNighttime;
-}
-
-provide('hourlyWeather', weatherData?.hourly);
-provide('dailyWeather', weatherData?.daily);
-provide('getIconUrl', getIconUrl);
+provide('hourlyWeather', searchedCity.value?.weather?.hourly);
+provide('dailyWeather', searchedCity.value?.weather?.daily);
+provide('sunrisesData', searchedCity.value?.weather?.sunrises);
 </script>

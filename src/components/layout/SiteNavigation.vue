@@ -64,13 +64,13 @@ const store = new useStore();
 const addCity = () => {
 	const cityObj = {
 		id: uid(), // only subscribed city has unique id
-		city: route.params.city,
+		name: route.params.city,
 		adcode: route.query.adcode,
 	};
 
 	store.commit('addCity', cityObj);
 
-	store.commit('deleteWeather');
+	store.commit('deleteCitiesWeather');
 
 	store.dispatch('storeSavedCities', store.getters.savedCities);
 

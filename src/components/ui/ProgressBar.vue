@@ -7,19 +7,23 @@
 				left: indicatorLeft,
 				'--width': barWidth,
 				'--left': barLeft,
+				backgroundImage: createBackgroundString,
 			}"
 		></div>
 	</div>
 </template>
 
 <script setup>
-import { defineProps, computed } from 'vue';
+import { computed } from 'vue';
+import { tempPalette } from '../charts/ChartActions.js';
 
 const props = defineProps({
 	indicatorWidth: { type: Number, required: true },
 	indicatorLeft: { type: Number, required: true },
 	barWidth: { type: Number, required: false },
 	barLeft: { type: Number, required: false },
+	minTempIndex: { type: Number, required: true },
+	maxTempIndex: { type: Number, required: true },
 });
 
 const indicatorWidth = computed(() => props.indicatorWidth * 100 + '%');
@@ -31,6 +35,15 @@ const barWidth = computed(() => (1 / props.indicatorWidth) * 100 + '%');
 const barLeft = computed(
 	() => (-1 / props.indicatorWidth) * props.indicatorLeft * 100 + '%'
 );
+
+const createBackgroundString = computed(() => {
+	let string = 'linear-gradient(to right';
+	for (let i = 0; i < props.maxTempIndex - props.minTempIndex + 1; i++) {
+		string = string + ',' + tempPalette[props.minTempIndex + i].hex;
+	}
+	string += ')';
+	return string;
+});
 </script>
 
 <style scoped>
@@ -38,7 +51,7 @@ const barLeft = computed(
 	position: relative;
 	width: 100%;
 	height: 0.5rem;
-	background: #004e71;
+	background: rgba(0, 0, 0, 0.2);
 	border-radius: 100px;
 }
 
@@ -59,11 +72,5 @@ const barLeft = computed(
 	width: var(--width);
 	bottom: 0;
 	border-radius: inherit;
-	background-image: linear-gradient(
-		to right,
-		#86efac 10%,
-		#fef08a,
-		#f9a252 90%
-	);
 }
 </style>

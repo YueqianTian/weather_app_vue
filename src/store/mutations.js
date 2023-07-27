@@ -5,13 +5,13 @@ export default {
 	addCity(state, payload) {
 		state.savedCities.push(payload);
 	},
-	setDetailedCityWeather(state, payload) {
-		state.detailedCityWeather = payload;
-	},
-	deleteWeather(state) {
+	deleteCitiesWeather(state) {
 		delete state.weather;
 	},
 	setSearchResults(state, payload) {
 		state.searchResults = payload;
+	},
+	setSearchedCity(state, payload) {
+		state.searchedCity = payload;
 	},
 };
