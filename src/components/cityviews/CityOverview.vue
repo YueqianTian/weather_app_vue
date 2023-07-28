@@ -2,7 +2,7 @@
 	<div class="flex flex-col items-center text-white py-12">
 		<h1 class="text-4xl mb-4">{{ route.params.city }}</h1>
 
-		<p class="text-8xl mb-6">
+		<p class="text-8xl mb-6 ml-6">
 			{{ Math.round(hourlyWeather[0]?.temp_fc) }}&deg;
 		</p>
 

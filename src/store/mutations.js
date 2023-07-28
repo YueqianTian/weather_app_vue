@@ -6,7 +6,8 @@ export default {
 		state.savedCities.push(payload);
 	},
 	deleteCitiesWeather(state) {
-		delete state.weather;
+		if (!state.savedCities) return;
+		state.savedCities.forEach((i) => delete i.weather);
 	},
 	setSearchResults(state, payload) {
 		state.searchResults = payload;

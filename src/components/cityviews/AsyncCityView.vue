@@ -60,26 +60,15 @@ const getSelectedDate = (day) => {
 	selectedDate.value = day;
 };
 
-const goToIndexView = (indexId, date = new Date()) => {
-	const selectedIndex = indexGroup.value.find(
-		(index) => index.id === indexId
-	);
-	const { id } = selectedIndex;
-
-	const query = Object.assign({}, route.query);
-	router.push({
-		name: 'indexView',
-		params: { index: id },
-		query: { ...query, date: date ? date : new Date() },
-	});
-};
-
 // Get city weather
 const selectedCityWeather = async () => {
 	let weatherData;
 
 	// 1. If city weather in 'store / searchedCity'
-	if (searchedCity.value) {
+	if (
+		searchedCity.value &&
+		searchedCity.value.adcode === route.query.adcode
+	) {
 		weatherData = searchedCity.value.weather;
 	}
 	// 2. If the city in 'citylist' and weather data saved in homepage
@@ -131,6 +120,21 @@ const removeCity = () => {
 	store.dispatch('storeSavedCities', updatedCities);
 
 	router.push({ name: 'home' });
+};
+
+// Go to index view
+const goToIndexView = (indexId, date = new Date()) => {
+	const selectedIndex = indexGroup.value.find(
+		(index) => index.id === indexId
+	);
+	const { id } = selectedIndex;
+
+	const query = Object.assign({}, route.query);
+	router.push({
+		name: 'indexView',
+		params: { index: id },
+		query: { ...query, date: date ? date : new Date() },
+	});
 };
 
 provide('hourlyWeather', searchedCity.value?.weather?.hourly);
