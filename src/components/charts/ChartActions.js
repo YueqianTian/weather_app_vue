@@ -1,9 +1,7 @@
 let delayed;
-import { DateTime } from '../../node_modules/@types/luxon/index';
 
-// Get new date - refer to : chartjs- Utils
 export function newDate(days) {
-	return DateTime.now().plus({ days }).toJSDate();
+	return new Date(new Date().setDate(new Date().getDate() + days));
 }
 
 // Get date of tommorrow

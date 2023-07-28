@@ -7,7 +7,7 @@
 				left: indicatorLeft,
 				'--width': barWidth,
 				'--left': barLeft,
-				backgroundImage: createBackgroundString,
+				'--backgroundImage': createBackgroundString,
 			}"
 		></div>
 	</div>
@@ -72,5 +72,6 @@ const createBackgroundString = computed(() => {
 	width: var(--width);
 	bottom: 0;
 	border-radius: inherit;
+	background-image: var(--backgroundImage);
 }
 </style>

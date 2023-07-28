@@ -7,7 +7,7 @@
 			<h2>每小时天气预报</h2>
 		</div>
 
-		<div class="flex gap-10 overflow-x-scroll">
+		<div class="flex gap-8 overflow-x-scroll">
 			<ul
 				v-for="hourlyData in hourlyWeather"
 				:key="hourlyData?.data_time"
@@ -26,7 +26,7 @@
 					</div>
 
 					<img
-						class="w-max h-[50px] object-cover brightness-200"
+						class="max-w-max h-[50px] object-cover brightness-200"
 						:src="
 							getIconUrl(
 								{ weatherData: hourlyData, sunrisesData },
