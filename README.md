@@ -1,4 +1,6 @@
 # Vue Weather App v2.0
+  
+![screenshot_weather_app](https://github.com/YueqianTian/weather_app_vue/assets/108514828/0fc74f8c-e3fb-484c-b3ee-b787fdff116d)
 
 John Komomarnicki - Vue and Taiwind - Weather App Build
 
