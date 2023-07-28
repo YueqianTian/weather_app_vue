@@ -1,4 +1,4 @@
-import icons from '../json/iconcodeConversion.json';
+import icons from '../json/iconCodeConversion.json';
 
 // get icon url
 const isDaytimeOrNighttime = (sunrisesData, hour) => {
