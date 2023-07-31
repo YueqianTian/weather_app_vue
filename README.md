@@ -8,6 +8,8 @@ Re-created a Vue weather search app. This app was written in Vue3 (including Vue
 
 See demo: https://weather-app-vue-v2.netlify.app/
 
+![screenshot_weather_app](https://github.com/YueqianTian/weather_app_vue/assets/108514828/0fc74f8c-e3fb-484c-b3ee-b787fdff116d)
+
 ## New features
 
 Index chart (v2.0)  
