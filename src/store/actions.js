@@ -31,6 +31,7 @@ export default {
 		}
 
 		// Send Request
+	
 		const endpoints = [
 			`${config.REQUEST_BASE_URL_APISPACE}/456456/weather/v001/hour?hours=${config.FCST_HOURS}&areacode=${selectedAreacode}`,
 			`${config.REQUEST_BASE_URL_APISPACE}/456456/weather/v001/day?days=${config.FCST_DAYS}&areacode=${selectedAreacode}`,
