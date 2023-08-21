@@ -31,12 +31,10 @@ export default {
 		}
 
 		// Send Request
-		const baseUrl = 'https://eolink.o.apispace.com';
-
 		const endpoints = [
-			`${baseUrl}/456456/weather/v001/hour?hours=${config.FCST_HOURS}&areacode=${selectedAreacode}`,
-			`${baseUrl}/456456/weather/v001/day?days=${config.FCST_DAYS}&areacode=${selectedAreacode}`,
-			`${baseUrl}/ewre/lives_geo/v001/sun?days=${config.FCST_SUNRISES_DAYS}&areacode=${selectedAreacode}`,
+			`${config.REQUEST_BASE_URL_APISPACE}/456456/weather/v001/hour?hours=${config.FCST_HOURS}&areacode=${selectedAreacode}`,
+			`${config.REQUEST_BASE_URL_APISPACE}/456456/weather/v001/day?days=${config.FCST_DAYS}&areacode=${selectedAreacode}`,
+			`${config.REQUEST_BASE_URL_APISPACE}/ewre/lives_geo/v001/sun?days=${config.FCST_SUNRISES_DAYS}&areacode=${selectedAreacode}`,
 		];
 
 		const response = await axios.all(
