@@ -2,9 +2,9 @@
 
 重新编写John Komomarnicki - Vue and Taiwind - Weather App Build，添加自定义视图及其它新功能。
 
-### 描述
+## 描述
 
-用Vue重新编写的天气预报app。 该app用 Vue3（包括 VueX / Vue-Router）编写，重新编写了一些算法逻辑。 V2.0增加了新功能 —— 用 Vue Chart.js 创建了图表视图。
+用Vue重新编写的天气预报app。 该app用 Vue3（包括 VueX / Vue-Router），重新编写了一些算法和逻辑。 V2.0增加了新功能 —— 用 Vue Chart.js 创建了图表视图。
 
 DEMO: https://weather-app-vue-v2.netlify.app/
 
