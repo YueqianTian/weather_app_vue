@@ -8,6 +8,9 @@
 
 DEMO: https://weather-app-vue-v2.netlify.app/
 
+![screenshot_weather_app](https://github.com/YueqianTian/weather_app_vue/assets/108514828/7d2a7e98-a25b-4fa7-92e6-d756b1618089)
+
+
 ## 新功能
 
 A.  图表视图（v2.0）:  未来 10 天内每小时天气指数数据（温度、相对湿度等）概览的折线图。（由于只有48小时的逐小时预报，图表根据第二天的数据搭建。）
