@@ -8,6 +8,8 @@
 
 DEMO: https://weather-app-vue-v2.netlify.app/
 
+![screenshot_weather_app](https://github.com/YueqianTian/weather_app_vue/assets/108514828/7d2a7e98-a25b-4fa7-92e6-d756b1618089)
+
 ## 新功能
 
 A. 图表视图（v2.0）: 未来 10 天内每小时天气指数数据（温度、相对湿度等）概览的折线图。（由于只有 48 小时的逐小时预报，图表根据第二天的数据搭建。）
@@ -22,7 +24,7 @@ D. 搜索查询的预处理器: 使用 AMap API 基于国内精准搜索行政�
 
 改用了国内 API （行政区域查询 | 国内天气预报），更符合国内搜索习惯。你需要在 APISpace API(有免费使用版)和 AMap API 注册新的 API 密钥，在文档 .env 中进行更新。
 
-搜索语言 - 中文（不包含拼音）  
+搜索语言 - 中文（不包含拼音）
 搜索范围 - 中国
 
 ## 搭建工具
