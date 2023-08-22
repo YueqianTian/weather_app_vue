@@ -26,7 +26,6 @@ import CalendarWeekDayItem from '../calendar/CalendarWeekDayItem.vue';
 import CalendarDateIndicator from '../calendar/CalendarDateIndicator.vue';
 import { computed, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import * as config from '../../assets/js/config.js';
 
 const emit = defineEmits(['dateSelected']);
 
@@ -38,7 +37,7 @@ const today = new Date();
 // ['day1','day2'...'day10']
 const days = computed(() => {
 	let daysArr = [];
-	for (let i = 0; i < config.FCST_DAYS; i++) {
+	for (let i = 0; i < import.meta.env.VITE_FCST_DAYS; i++) {
 		daysArr.push(
 			new Date(today.getFullYear(), today.getMonth(), today.getDate() + i)
 		);

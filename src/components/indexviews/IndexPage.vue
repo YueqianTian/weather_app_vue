@@ -46,7 +46,6 @@ import IndexIntro from './IndexIntro.vue';
 import { useRoute } from 'vue-router';
 import { useStore } from 'vuex';
 import { ref, computed } from 'vue';
-import * as config from '../../assets/js/config.js';
 import {
 	newDate,
 	getSecondDay,
@@ -127,7 +126,7 @@ function completeHourlyData(data) {
 
 	// Complete data
 	let hourlyWeather_10days = [];
-	for (let i = 0; i < config.FCST_DAYS; i++) {
+	for (let i = 0; i < import.meta.env.VITE_FCST_DAYS; i++) {
 		for (let j = 0; j < 24; j++) {
 			hourlyWeather_10days.push({
 				...secondDayWeather[j],
@@ -151,7 +150,7 @@ function completeSunriseData(data) {
 
 	// Complete data
 	let sunriseData_10days = [];
-	for (let i = 0; i < config.FCST_DAYS; i++) {
+	for (let i = 0; i < import.meta.env.VITE_FCST_DAYS; i++) {
 		sunriseData_10days.push({
 			...sunriseSampleData,
 			data_time: new Date(

@@ -30,7 +30,7 @@ After downloading or cloning the repo, type `npm run dev` in the terminal to loa
 
 ## Note
 
-Use domestic API to get more precise data（including administrative regions and local weather）. You will need to sign up for an API key at APISpace API (free for trial) and AMap API to use in config.js.
+Use domestic API to get more precise data（including administrative regions and local weather）. You will need to sign up for an API key at APISpace API (free for trial) and AMap API to use in .env file.
 
 -   Search Language - Chinese only (not including Pinyin)
 -   Search scope - China

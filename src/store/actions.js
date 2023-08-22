@@ -1,4 +1,3 @@
-import * as config from '../assets/js/config.js';
 import areacode from '../assets/json/areacodeConversion.json';
 import executeSearchStrategy from '../assets/js/areaSearchStrategy.js';
 import axios from 'axios';
@@ -31,18 +30,25 @@ export default {
 		}
 
 		// Send Request
-	
+
 		const endpoints = [
-			`${config.REQUEST_BASE_URL_APISPACE}/456456/weather/v001/hour?hours=${config.FCST_HOURS}&areacode=${selectedAreacode}`,
-			`${config.REQUEST_BASE_URL_APISPACE}/456456/weather/v001/day?days=${config.FCST_DAYS}&areacode=${selectedAreacode}`,
-			`${config.REQUEST_BASE_URL_APISPACE}/ewre/lives_geo/v001/sun?days=${config.FCST_SUNRISES_DAYS}&areacode=${selectedAreacode}`,
+			`${
+				import.meta.env.VITE_REQUEST_FCST_HOURS_URL
+			}&areacode=${selectedAreacode}`,
+			`${
+				import.meta.env.VITE_REQUEST_FCST_DAYS_URL
+			}&areacode=${selectedAreacode}`,
+			`${
+				import.meta.env.VITE_REQUEST_FCST_SUNRISES_DAYS_URL
+			}&areacode=${selectedAreacode}`,
 		];
 
 		const response = await axios.all(
 			endpoints.map((endpoint) => {
 				return axios.get(endpoint, {
 					headers: {
-						'X-APISpace-Token': config.APISPACE_API_KEY,
+						'X-APISpace-Token': import.meta.env
+							.VITE_APISPACE_API_KEY,
 						'Authorization-Type': 'apikey',
 						Accept: 'application/json',
 					},
@@ -90,7 +96,9 @@ export default {
 		);
 
 		// Send request
-		const url = `https://restapi.amap.com/v3/config/district?keywords=${filteredSearchTerm}&key=${config.AMAP_API_KEY}`;
+		const url = `https://restapi.amap.com/v3/config/district?keywords=${filteredSearchTerm}&key=${
+			import.meta.env.VITE_AMAP_API_KEY
+		}`;
 		const response = await fetch(url, {
 			method: 'GET',
 			headers: { Accept: 'application/json' },
