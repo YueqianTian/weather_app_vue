@@ -33,13 +33,19 @@ export default {
 
 		const endpoints = [
 			`${
-				import.meta.env.VITE_REQUEST_FCST_HOURS_URL
+				import.meta.env.VITE_REQUEST_BASE_URL
+			}/456456/weather/v001/hour?hours=${
+				import.meta.env.VITE_FCST_HOURS
 			}&areacode=${selectedAreacode}`,
 			`${
-				import.meta.env.VITE_REQUEST_FCST_DAYS_URL
+				import.meta.env.VITE_REQUEST_BASE_URL
+			}/456456/weather/v001/day?days=${
+				import.meta.env.VITE_FCST_DAYS
 			}&areacode=${selectedAreacode}`,
 			`${
-				import.meta.env.VITE_REQUEST_FCST_SUNRISES_DAYS_URL
+				import.meta.env.VITE_REQUEST_BASE_URL
+			}/ewre/lives_geo/v001/sun?days=${
+				import.meta.env.VITE_FCST_SUNRISES_DAYS
 			}&areacode=${selectedAreacode}`,
 		];
 
