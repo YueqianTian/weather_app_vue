@@ -38,8 +38,8 @@ Use domestic API to get more precise data（including administrative regions and
 ## Built With
 
 -   Tailwind CSS
--   Vue Vite
--   Vue Chart.js (v2.0)
+-   Vue3 + Vue Chart.js
+-   Vite
 -   [AMap API (Geocoding API) ](https://lbs.amap.com/)
 -   [APISpace API (Weather API)](https://www.apispace.com/)
 

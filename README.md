@@ -30,8 +30,8 @@ D. 搜索查询的预处理器: 使用 AMap API 基于国内精准搜索行政�
 ## 搭建工具
 
 -   Tailwind CSS
--   Vue Vite
--   Vue Chart.js (v2.0)
+-   Vue3 + Vue Chart.js
+-   Vite
 -   [AMap API (Geocoding API) ](https://lbs.amap.com/)
 -   [APISpace API (Weather API)](https://www.apispace.com/)
 
